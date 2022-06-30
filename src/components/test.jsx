@@ -1,50 +1,20 @@
-import { useEffect,useState } from "react";
-import MoreMenu from "./MoreMenu"
+import {useEffect} from 'react'
+import '../styles/Content.scss'
+import MoreMenu from './MoreMenu'
 
-function randomBgColor() {
-    let red = Math.floor(Math.random() * 256);
-    let green = Math.floor(Math.random() * 256);
-    let blue = Math.floor(Math.random() * 256);
+export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButttonFnForSeparatePost,setTest}) {
 
-    return `rgb(${red}, ${green}, ${blue})`;
-}
-
-export default function ContentInner({
-    moreButttonFn,
-    setIsOpen,
-    posX,
-    posY,
-    isOpen,
-    likeFn,
-    like,
-    users,
-    photos,
-    post,
-    test,
-    comment,
-    commentisOpen,
-    showComment
-}) {
-
-    document.addEventListener("wheel", setIsOpen(false))
-
-    useEffect(()=> {
-        console.log(comment)
-    },[])
-
-    return ( 
-        <> 
-            {comment && post && photos && users && (
-                <div className="Content-container-inner">
+    return (
+        <div>
+            <div className="Content-container-inner">
                 <div className="Content-container-inner-header">
-                        <div>
-                            {/* ვიცი რო ინლაინ სტილი არაა მთლად მიმზიდავი მარა ფუნნქცია რო "ჩავაშენო" სტილში მჭირდება ;) */}
-                            <p className="user-name" style={{backgroundColor:randomBgColor()}}>{users.name.charAt()}</p> 
-                            <span>{users.name}</span>
-                        </div>
-                        <abbr title='more'>
+                    <div>
+                        <img src="" alt=""/>
+                        <span>{userInfo.users.name}</span>
+                    </div>
+                    <abbr title='more'>
                             <svg
-                                onClick={(e)=> moreButttonFn(e,post,users,photos)}
+                                onClick={(e)=> moreButttonFnForSeparatePost(e)}
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                                 className="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi">
@@ -55,22 +25,17 @@ export default function ContentInner({
                                 </g>
                             </svg>
                         </abbr>
-                        {isOpen && <MoreMenu
-                            setIsOpen={setIsOpen}
-                            posX={posX}
-                            test={test}
-                            posY={posY}/>}
+                        {isOpen && <MoreMenu setTest={setTest} setIsOpen={setIsOpen} posX={posX} posY={posY}/>}
                 </div>
                 <div className='Content-container-inner-title'>
-                        <p>{post.title}</p>
+                    <p>{userInfo.post.title}</p>
                 </div>
                 <div className='Content-container-inner-body'>
-                        <img src={photos.url} alt=""/>
+                    <img src={userInfo.photos.url} alt=""/>
                 </div>
                 <div className="Content-container-inner-footer">
                         <div>
-                            <svg 
-                                onClick={()=> showComment()}
+                            <svg
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                                 className="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi">
@@ -131,19 +96,8 @@ export default function ContentInner({
                                 </g>
                             </svg>
                         </div>
-                </div>
-                {commentisOpen && (
-                    <div className="Content-container-inner-comments">
-                        <p className="comment-logo">{comment.name.charAt()}</p>
-                        <div>
-                            <span>{comment.name}</span>
-                            <h1>{comment.body}</h1>
-                        </div>
                     </div>
-                )}
-                </div>
-                )
-            } 
-        </>
+            </div>
+        </div>
     )
 }

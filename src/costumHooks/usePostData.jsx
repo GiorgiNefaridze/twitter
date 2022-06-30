@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react';
 
 function usePostData(id) {
-    const [posts,setPosts] = useState({})
+    const [posts,setPosts] = useState([])
 
     useEffect(()=>{
         getPostData();
