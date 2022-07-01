@@ -9,7 +9,7 @@ export default function useComment(id){
     },[])
 
     const getCommentdData = async () => {
-        let comment = "comments";
+        let comment = "comments?postId=1&postId=2";
 
         if(id){
             comment = `comments?postId=${id}`

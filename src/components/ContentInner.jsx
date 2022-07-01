@@ -1,42 +1,33 @@
 import { useEffect,useState } from "react";
 import MoreMenu from "./MoreMenu"
 
-function randomBgColor() {
-    let red = Math.floor(Math.random() * 256);
-    let green = Math.floor(Math.random() * 256);
-    let blue = Math.floor(Math.random() * 256);
-
-    return `rgb(${red}, ${green}, ${blue})`;
-}
-
 export default function ContentInner({
     moreButttonFn,
     setIsOpen,
     posX,
     posY,
     isOpen,
-    likeFn,
     like,
     users,
     photos,
     post,
     test,
     comment,
-    commentisOpen,
-    showComment
+    showComment,
+    randomBgColor
 }) {
 
     document.addEventListener("wheel", setIsOpen(false))
 
-    useEffect(()=> {
-        console.log(comment)
-    },[])
+    // useEffect(()=> {
+    //     console.log(comment)
+    // })
 
     return ( 
         <> 
             {comment && post && photos && users && (
                 <div className="Content-container-inner">
-                <div className="Content-container-inner-header">
+                        <div className="Content-container-inner-header">
                         <div>
                             {/* ვიცი რო ინლაინ სტილი არაა მთლად მიმზიდავი მარა ფუნნქცია რო "ჩავაშენო" სტილში მჭირდება ;) */}
                             <p className="user-name" style={{backgroundColor:randomBgColor()}}>{users.name.charAt()}</p> 
@@ -44,7 +35,7 @@ export default function ContentInner({
                         </div>
                         <abbr title='more'>
                             <svg
-                                onClick={(e)=> moreButttonFn(e,post,users,photos)}
+                                onClick={(e)=> moreButttonFn(e,post,users,photos,users.name.charAt())}
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                                 className="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi">
@@ -60,17 +51,17 @@ export default function ContentInner({
                             posX={posX}
                             test={test}
                             posY={posY}/>}
-                </div>
-                <div className='Content-container-inner-title'>
-                        <p>{post.title}</p>
-                </div>
-                <div className='Content-container-inner-body'>
-                        <img src={photos.url} alt=""/>
-                </div>
-                <div className="Content-container-inner-footer">
+                        </div>
+                        <div className='Content-container-inner-title'>
+                                <p>{post.title}</p>
+                        </div>
+                        <div className='Content-container-inner-body'>
+                                <img src={photos.url} alt=""/>
+                        </div>
+                        <div className="Content-container-inner-footer">
                         <div>
                             <svg 
-                                onClick={()=> showComment()}
+                                onClick={(e)=> showComment(e)}
                                 viewBox="0 0 24 24"
                                 aria-hidden="true"
                                 className="r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1hdv0qi">
@@ -131,16 +122,19 @@ export default function ContentInner({
                                 </g>
                             </svg>
                         </div>
-                </div>
-                {commentisOpen && (
-                    <div className="Content-container-inner-comments">
-                        <p className="comment-logo">{comment.name.charAt()}</p>
-                        <div>
-                            <span>{comment.name}</span>
-                            <h1>{comment.body}</h1>
                         </div>
-                    </div>
-                )}
+                        <div className="Content-container-inner-comments">
+                            {comment.map(eachComment => (
+                            <div className="Content-container-inner-comments-inner">
+                                <p className="comment-logo">{eachComment.name.charAt()}</p>
+                                <div>
+                                    <span>{eachComment.name}</span>
+                                    <h1>{eachComment.body}</h1>
+                                </div>
+                            </div>
+                            ))}
+                            <h1>hello world</h1>
+                        </div>
                 </div>
                 )
             } 

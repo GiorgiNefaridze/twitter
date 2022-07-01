@@ -1,7 +1,7 @@
 import { useEffect,useRef } from "react";
 import '../styles/MoreMenu.scss'
 
-export default function MoreMenu({posX,posY,setIsOpen,setTest}) {
+export default function MoreMenu({posX,posY,setIsOpen,setTest,likeFn}) {
 
     const goBack = () => {
         setTest(true)
@@ -32,7 +32,7 @@ export default function MoreMenu({posX,posY,setIsOpen,setTest}) {
 
     return (
         <div ref={moreMenuRef} style={moreMenuStyle} className="more-menu">
-            <div>
+            <div onClick={()=> likeFn()}>
                 <svg
                     viewBox="0 0 24 24"
                     aria-hidden="true"

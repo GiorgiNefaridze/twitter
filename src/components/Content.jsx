@@ -1,11 +1,18 @@
-import {useState,useEffect} from "react"
+import {useState} from "react"
 import usePhotoData from "../costumHooks/usePhotoData"
 import useFetch from "../costumHooks/useFetch"
 import ContentInner from "./ContentInner"
 import {Spinner} from 'reactstrap'
 import '../styles/Content.scss'
-import Test from "./test"
+import SeparatePost from './separatePost'
 
+function randomBgColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+
+    return `rgb(${red}, ${green}, ${blue})`;
+}
 
 export default function Content() {
 
@@ -21,15 +28,15 @@ export default function Content() {
     const [test,setTest] = useState(true)
     const [commentisOpen,setCommentisOpen] = useState(false)
 
-    const moreButttonFn = (e,post,users,photos) => {
+    const moreButttonFn = (e,post,users,photos,firstLetter) => {
         setIsOpen(true)
         setPosX(e.pageX)
         setPosY(e.pageY)
         setTest(false)
-        setUserInfo({post,users,photos})
+        setUserInfo({post,users,photos,firstLetter})
     }
 
-    const likeFn = (user) => {
+    const likeFn = () => {
         setLike(!like)
     }
 
@@ -39,8 +46,9 @@ export default function Content() {
         setPosY(e.pageY)
     }
 
-    const showComment = () => {
-        setCommentisOpen((prev)=> !prev)
+    const showComment = (e) => {
+        e.target.parentElement.parentElement.parentElement.childNodes[4].style.display = commentisOpen ? 'none' : "block"
+        setCommentisOpen(!commentisOpen)
     }
 
     return (
@@ -65,11 +73,12 @@ export default function Content() {
                 post={post}
                 photos={photo[post.userId]}
                 users={author[post.userId]}
-                comment={comment[post.userId]}
+                comment={comment}
                 test={post}
                 commentisOpen={commentisOpen}
                 showComment={showComment}
-            />)) : <Test setTest={setTest} like={like} moreButttonFnForSeparatePost={moreButttonFnForSeparatePost} posX={posX} posY={posY} setIsOpen={setIsOpen} isOpen={isOpen} userInfo={userInfo} />}
+                randomBgColor={randomBgColor}
+            />)) : <SeparatePost likeFn={likeFn} comment={comment} setTest={setTest} like={like} randomBgColor={randomBgColor} moreButttonFnForSeparatePost={moreButttonFnForSeparatePost} posX={posX} posY={posY} setIsOpen={setIsOpen} isOpen={isOpen} userInfo={userInfo} />}
         </div>
     )
 }

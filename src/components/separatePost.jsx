@@ -1,15 +1,13 @@
-import {useEffect} from 'react'
 import '../styles/Content.scss'
 import MoreMenu from './MoreMenu'
 
-export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButttonFnForSeparatePost,setTest}) {
-
+export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButttonFnForSeparatePost,setTest,randomBgColor,comment,likeFn}) {
     return (
         <div>
             <div className="Content-container-inner">
                 <div className="Content-container-inner-header">
                     <div>
-                        <img src="" alt=""/>
+                        <p className="user-name" style={{backgroundColor:randomBgColor()}}>{userInfo.firstLetter}</p>
                         <span>{userInfo.users.name}</span>
                     </div>
                     <abbr title='more'>
@@ -25,7 +23,7 @@ export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButtt
                                 </g>
                             </svg>
                         </abbr>
-                        {isOpen && <MoreMenu setTest={setTest} setIsOpen={setIsOpen} posX={posX} posY={posY}/>}
+                        {isOpen && <MoreMenu likeFn={likeFn} setTest={setTest} setIsOpen={setIsOpen} posX={posX} posY={posY}/>}
                 </div>
                 <div className='Content-container-inner-title'>
                     <p>{userInfo.post.title}</p>
@@ -96,7 +94,19 @@ export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButtt
                                 </g>
                             </svg>
                         </div>
+                </div>
+                <div className="Content-container-inner-comments">
+                    {comment.map((eachComment,index) => (
+                    <div key={index} className="Content-container-inner-comments-inner">
+                        <p className="comment-logo">{eachComment.name.charAt()}</p>
+                        <div>
+                            <span>{eachComment.name}</span>
+                            <h1>{eachComment.body}</h1>
+                        </div>
                     </div>
+                    ))}
+                    <h1>hello world</h1>
+                </div>
             </div>
         </div>
     )
