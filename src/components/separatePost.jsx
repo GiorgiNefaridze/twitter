@@ -1,7 +1,13 @@
 import '../styles/Content.scss'
 import MoreMenu from './MoreMenu'
+import { useEffect } from 'react'
 
 export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButttonFnForSeparatePost,setTest,randomBgColor,comment,likeFn}) {
+
+    // useEffect(()=>{
+    //     if()
+    // },[])
+
     return (
         <div>
             <div className="Content-container-inner">
@@ -95,7 +101,7 @@ export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButtt
                             </svg>
                         </div>
                 </div>
-                <div className="Content-container-inner-comments">
+                <div className="Content-container-inner-comments separate-post">
                     {comment.map((eachComment,index) => (
                     <div key={index} className="Content-container-inner-comments-inner">
                         <p className="comment-logo">{eachComment.name.charAt()}</p>
@@ -105,7 +111,6 @@ export default function Test({userInfo,like,isOpen,setIsOpen,posX,posY,moreButtt
                         </div>
                     </div>
                     ))}
-                    <h1>hello world</h1>
                 </div>
             </div>
         </div>
