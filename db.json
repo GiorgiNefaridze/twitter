@@ -1,6 +1,6 @@
 {
   "names": [
-    {"giorgi"},
-    {"gio"},
-  ],
+    {userName:"giorgi"},
+    {userName:"gio"}
+  ]
 }
