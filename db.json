@@ -1,0 +1,11 @@
+{
+  "person" : {
+    "name" : "სახელი",
+    "phone" : 543-678-321,
+    "email" : "myemail@gmail.com",
+    "address" : "123 Main Street,USA",
+    "summary" : "მოგვიყევი მოკლედ თქვენს შესახებ",
+    "skills" : "თქვენი უნარები",
+    "experience" : "თქვენი გამოცდილება"
+  } 
+}
